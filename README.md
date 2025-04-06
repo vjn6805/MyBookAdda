@@ -116,8 +116,6 @@ CREATE TABLE requests (
 
 ---
 
----
-
 ## Author
 
 **Veer Jain**  
