@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard | Book Exchange</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-r from-blue-50 to-white min-h-screen text-gray-800">
+
+  <header class="flex justify-between items-center p-6 bg-white shadow-md">
+    <h1 class="text-2xl font-bold text-blue-700">MyBookAdda</h1>
+    
+    <nav class="flex items-center space-x-4">
+      <span class="text-gray-700">Hello, <strong>{{ username }}</strong> 👋</span>
+      <a href="/logout" class="text-sm text-white bg-red-500 px-3 py-1 rounded hover:bg-red-600 transition">Logout</a>
+    </nav>
+  </header>
+
+  <!-- Dashboard -->
+  <main class="max-w-7xl mx-auto px-6 py-12">
+    <h2 class="text-3xl font-bold text-gray-800 mb-10 text-center">Your Dashboard</h2>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      
+      <a href="/list-book" class="p-6 bg-white rounded-2xl shadow-lg hover:shadow-xl transition">
+        <h3 class="text-xl font-semibold text-blue-600 mb-2">➕ List a New Book</h3>
+        <p class="text-gray-600">Upload books you want to lend and earn points.</p>
+      </a>
+      <a href="/my-books" class="p-6 bg-white rounded-2xl shadow-lg hover:shadow-xl transition">
+        <h3 class="text-xl font-semibold text-blue-600 mb-2">📚 My Listed Books</h3>
+        <p class="text-gray-600">Manage your listed books and check their availability.</p>
+      </a>
+
+      <a href="/browse-books" class="p-6 bg-white rounded-2xl shadow-lg hover:shadow-xl transition">
+        <h3 class="text-xl font-semibold text-blue-600 mb-2">🔍 Browse Available Books</h3>
+        <p class="text-gray-600">Find books listed by others and request them.</p>
+      </a>
+
+      <a href="/requests" class="p-6 bg-white rounded-2xl shadow-lg hover:shadow-xl transition">
+        <h3 class="text-xl font-semibold text-blue-600 mb-2">📩 Book Requests</h3>
+        <p class="text-gray-600">View and respond to requests on your books.</p>
+      </a>
+    </div>
+  </main>
+
+</body>
+</html>

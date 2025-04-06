@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit Book | BookExchange</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-800 min-h-screen">
+
+  <!-- Header -->
+  <header class="p-6 bg-white shadow flex justify-between items-center">
+    <h1 class="text-2xl font-bold text-blue-600">MyBookAdda</h1>
+    <a href="/my-books" class="text-sm text-gray-600 hover:text-blue-600 transition">← Back to My Books</a>
+  </header>
+
+  <!-- Main Content -->
+  <main class="max-w-2xl mx-auto mt-12 bg-white p-8 rounded-lg shadow-lg">
+    <h2 class="text-2xl font-semibold text-blue-600 mb-6">Edit Book Details</h2>
+
+    <form action="" method="POST" class="space-y-5">
+      <div>
+        <label class="block text-sm font-medium mb-1">Title</label>
+        <input type="text" name="title" value="{{ book.title }}" required class="w-full border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium mb-1">Author</label>
+        <input type="text" name="author" value="{{ book.author }}" required class="w-full border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium mb-1">Condition</label>
+        <select name="condition" required class="w-full border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+          {% for option in ['New', 'Good', 'Fair', 'Used'] %}
+            <option value="{{ option }}" {% if book.book_condition == option %}selected{% endif %}>{{ option }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium mb-1">Points</label>
+        <input type="number" name="points" value="{{ book.points }}" required class="w-full border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium mb-1">Description</label>
+        <textarea name="description" rows="3" class="w-full border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">{{ book.description }}</textarea>
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium mb-1">Image URL</label>
+        <input type="text" name="image_url" value="{{ book.image_url }}" class="w-full border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+      </div>
+
+      <div class="flex items-center">
+        <input type="checkbox" name="available" id="available" class="mr-2" {% if book.available %}checked{% endif %}>
+        <label for="available" class="text-sm">Available for exchange</label>
+      </div>
+
+      <button type="submit" class="w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition">Update Book</button>
+    </form>
+  </main>
+
+</body>
+</html>

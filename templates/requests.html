@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Requests | Book Exchange</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-800 min-h-screen">
+
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky top-0 z-10">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <h1 class="text-2xl font-bold text-blue-600">MyBookAdda</h1>
+            <nav class="space-x-4">
+                <a href="/dashboard" class="text-gray-600 hover:text-blue-600 transition">Dashboard</a>
+                <a href="/logout" class="text-gray-600 hover:text-red-500 transition">Logout</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-6 py-10 space-y-16">
+>
+        <section>
+            <h2 class="text-2xl font-semibold text-gray-700 mb-6">Incoming Requests for Your Books</h2>
+
+            {% if owner_requests %}
+                <div class="space-y-6">
+                    {% for req in owner_requests %}
+                        <div class="bg-white rounded-xl shadow p-6">
+                            <div class="flex flex-col md:flex-row justify-between md:items-center gap-4">
+                                <div class="space-y-1">
+                                    <h3 class="text-lg font-bold text-blue-700">{{ req.title }}</h3>
+                                    <p>Requested by: <span class="font-semibold">{{ req.borrower_name }}</span></p>
+                                    <p class="text-sm text-gray-600">Requested on {{ req.request_date.strftime("%b %d, %Y") }}</p>
+                                    <p class="text-sm text-gray-600">Points: {{ req.points }}</p>
+                                    <p>Status:
+                                        <span class="font-semibold text-blue-500">{{ req.status }}</span>
+                                        {% if req.status != 'pending' %}
+                                            ({{ req.decision_date.strftime("%b %d, %Y") }})
+                                        {% endif %}
+                                    </p>
+                                </div>
+
+                                {% if req.status == 'pending' %}
+                                    <form method="POST" class="flex gap-2">
+                                        <input type="hidden" name="request_id" value="{{ req.request_id }}">
+                                        <button name="action" value="approve" class="px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded transition">Approve</button>
+                                        <button name="action" value="reject" class="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded transition">Reject</button>
+                                    </form>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p class="text-gray-500 text-sm">No incoming requests yet.</p>
+            {% endif %}
+        </section>
+
+        <!-- My Requests -->
+        <section>
+            <h2 class="text-2xl font-semibold text-gray-700 mb-6">My Book Requests</h2>
+
+            {% if my_requests %}
+                <div class="space-y-6">
+                    {% for req in my_requests %}
+                        <div class="bg-white rounded-xl shadow p-6">
+                            <div class="space-y-1">
+                                <h3 class="text-lg font-bold text-blue-700">{{ req.title }}</h3>
+                                <p>Owner: <span class="font-semibold">{{ req.owner_name }}</span></p>
+                                <p class="text-sm text-gray-600">Requested on {{ req.request_date.strftime("%b %d, %Y") }}</p>
+                                <p class="text-sm text-gray-600">Points: {{ req.points }}</p>
+                                <p>Status:
+                                    <span class="font-semibold 
+                                        {% if req.status == 'approved' %}text-green-500
+                                        {% elif req.status == 'rejected' %}text-red-500
+                                        {% else %}text-blue-500{% endif %}">
+                                        {{ req.status }}
+                                    </span>
+                                    {% if req.status != 'pending' %}
+                                        ({{ req.decision_date.strftime("%b %d, %Y") }})
+                                    {% endif %}
+                                </p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p class="text-gray-500 text-sm">You haven't requested any books yet.</p>
+            {% endif %}
+        </section>
+
+    </main>
+</body>
+</html>

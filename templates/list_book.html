@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>List a New Book | BookExchange</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <header class="p-6 bg-white shadow flex justify-between">
+        <h1 class="text-2xl font-bold text-blue-600">MyBookAdda</h1>
+        <a href="/dashboard" class="text-gray-600 hover:text-blue-600">← Back to Dashboard</a>
+    </header>
+
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="max-w-2xl mx-auto mt-6">
+          {% for message in messages %}
+            <div class="bg-green-100 text-green-800 px-4 py-2 rounded border border-green-300 shadow mb-2">
+              {{ message }}
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+
+    <main class="max-w-2xl mx-auto mt-8 bg-white p-8 rounded shadow">
+        <h2 class="text-xl font-bold mb-6">List a New Book</h2>
+        <form action="/list-book" method="POST" class="space-y-4">
+            <div>
+                <label class="block text-sm font-medium">Book Title</label>
+                <input type="text" name="title" required class="w-full border border-gray-300 p-2 rounded">
+            </div>
+            <div>
+                <label class="block text-sm font-medium">Author</label>
+                <input type="text" name="author" required class="w-full border border-gray-300 p-2 rounded">
+            </div>
+            <div>
+                <label class="block text-sm font-medium">Condition</label>
+                <select name="condition" class="w-full border border-gray-300 p-2 rounded" required>
+                    <option value="">Select</option>
+                    <option>New</option>
+                    <option>Good</option>
+                    <option>Fair</option>
+                    <option>Used</option>
+                </select>
+            </div>
+            <div>
+                <label class="block text-sm font-medium">Points (Exchange Value)</label>
+                <input type="number" name="points" required min="1" class="w-full border border-gray-300 p-2 rounded">
+            </div>
+            <div>
+                <label class="block text-sm font-medium">Description (Optional)</label>
+                <textarea name="description" class="w-full border border-gray-300 p-2 rounded" rows="3"></textarea>
+            </div>
+            <div>
+                <label class="block text-sm font-medium">Image URL (Optional)</label>
+                <input type="text" name="image_url" class="w-full border border-gray-300 p-2 rounded">
+            </div>
+            <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+                List Book
+            </button>
+        </form>
+    </main>
+
+</body>
+</html>
